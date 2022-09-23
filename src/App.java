@@ -22,7 +22,26 @@ public class App {
         System.out.println(allPoste);
 
 
+    }
 
+    static void freeHours() {
+
+        LocalTime updatedTime;
+        int now = LocalTime.now().toSecondOfDay();
+        now = 14*3600;
+        int timeOpen[] = {(9 * 3600), 12 * 3600, 14 * 3600, 20 * 3600};
+        for (int time : timeOpen){
+                if((time >=9*3600 && time<=12*3600) ||(time>=14*3600 && time<=20*3600) )
+                if(now>time){
+                    System.out.println((now - time) / 3600);
+
+                }
+
+        }
+
+
+            LocalTime timeMorning = LocalTime.parse("12:00");
+        // System.out.println(now);
     }
 
     static void isFree(int périodeHoraire) throws ParseException {
@@ -41,18 +60,6 @@ public class App {
 
     public static void main(String[] args) throws ParseException {
 
-
-        ArrayList<Ecrans> allEcran = new ArrayList<>();
-        allEcran.add(new Ecrans("Dell", 3));
-        allEcran.add(new Ecrans("HP", 1));
-        allEcran.add(new Ecrans("Asus", 3));
-        allEcran.add(new Ecrans("Samsung", 2));
-
-        ArrayList<Console> allConsole = new ArrayList<>();
-        allConsole.add(new Console("Xbox", 4));
-        allConsole.add(new Console("PlayStation5", 3));
-        allConsole.add(new Console("Nintendo switch", 2));
-
         ArrayList<Categorie> allCategorie = new ArrayList<>();
         allCategorie.add(new Categorie("football"));
         allCategorie.add(new Categorie("Guerre"));
@@ -61,12 +68,33 @@ public class App {
         Categorie footballCategorie = new Categorie("Football");
         Categorie guerreCategorie = new Categorie("Guerre");
 
-        // allCategorie.add(new Categorie("football"));
-        //allCategorie.add(new Categorie("Guerre"));
         allJeux.add(new Jeux("FIFA", footballCategorie));
         allJeux.add(new Jeux("PES", footballCategorie));
         allJeux.add(new Jeux("Counter-Strike", guerreCategorie));
         allJeux.add(new Jeux("Assassin's Creed", guerreCategorie));
+
+        HashMap<String, Jeux[]> listJeuxForConsole = new HashMap<>();
+        listJeuxForConsole.put("Xbox", new Jeux[]{allJeux.get(0), allJeux.get(1), allJeux.get(2)});
+        listJeuxForConsole.put("PlayStation5", new Jeux[]{allJeux.get(1), allJeux.get(3), allJeux.get(2)});
+        listJeuxForConsole.put("Nintendo switch", new Jeux[]{allJeux.get(1), allJeux.get(0), allJeux.get(2)});
+
+        ArrayList<Ecrans> allEcran = new ArrayList<>();
+        allEcran.add(new Ecrans("Dell", 3));
+        allEcran.add(new Ecrans("HP", 1));
+        allEcran.add(new Ecrans("Asus", 3));
+        allEcran.add(new Ecrans("Samsung", 2));
+
+        ArrayList<Console> allConsole = new ArrayList<>();
+        allConsole.add(new Console("Xbox", 4, listJeuxForConsole.get("Xbox")));
+        allConsole.add(new Console("PlayStation5", 3, listJeuxForConsole.get("PlayStation5")));
+        allConsole.add(new Console("Nintendo switch", 2, listJeuxForConsole.get("Nintendo switch")));
+
+        System.out.println(allConsole.get(0).getJeux()[0].getNom());
+
+
+        // allCategorie.add(new Categorie("football"));
+        //allCategorie.add(new Categorie("Guerre"));
+
 
         HashMap<String, Integer> tarifHoraire = new HashMap<String, Integer>();
         tarifHoraire.put("30 min", 5);
@@ -75,14 +103,10 @@ public class App {
         tarifHoraire.put("5 h", 40);
         tarifHoraire.put("all", 65);
 
-        HashMap<String, Jeux[]> listJeuxForConsole = new HashMap<>();
-        listJeuxForConsole.put("Xbox", new Jeux[]{allJeux.get(0),allJeux.get(1),allJeux.get(2)});
-        listJeuxForConsole.put("PlayStation5", new Jeux[]{allJeux.get(1),allJeux.get(3),allJeux.get(2)});
-        listJeuxForConsole.put("Nintendo switch", new Jeux[]{allJeux.get(1),allJeux.get(0),allJeux.get(2)});
 
         System.out.println(listJeuxForConsole.get("Xbox")[0].getNom());
 
-//     LocalTime now = LocalTime.parse(LocalTime.now()+"12:10");
+//     LocalTime now = LocalTime.parse(LocalTim e.now()+"12:10");
 //
 //        System.out.println(now);
         ArrayList<Poste> allPoste = new ArrayList<>();
@@ -99,8 +123,9 @@ public class App {
 
         //System.out.println(Console.getFreeDevice(allConsole));
 
-       // afficheDashboard(allEcran, allConsole);
+        //afficheDashboard(allEcran, allConsole);
         // allConsole.indexOf()
+        freeHours();
 
     }
 }
