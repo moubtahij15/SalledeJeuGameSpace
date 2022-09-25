@@ -2,7 +2,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Console extends Device {
-      private Jeux[] jeux ;
+    private Jeux[] jeux;
 
     public Jeux[] getJeux() {
         return jeux;
@@ -30,13 +30,19 @@ public class Console extends Device {
 
     public static ArrayList<Console> updateConsole(ArrayList<Console> allConsole, String nameConsole) {
 
-        Console console1 = new Console(nameConsole);
+
+
+        //Console console1 = new Console(nameConsole);
 
         for (Console curInstance : allConsole) {
-            if (curInstance.getNomDevice().equals(console1.getNomDevice())) {
-                Console valueConsoleUpdated = new Console(curInstance.getNomDevice(), (curInstance.getQuantite() - 1),curInstance.getJeux());
-                allConsole.set(allConsole.indexOf(curInstance), valueConsoleUpdated);
+            if (curInstance.getNomDevice() == nameConsole) {
+                curInstance.setQuantite(curInstance.getQuantite() - 1);
             }
+
+         /*   if (curInstance.getNomDevice().equals(console1.getNomDevice())) {
+                Console valueConsoleUpdated = new Console(curInstance.getNomDevice(), (curInstance.getQuantite() - 1), curInstance.getJeux());
+                allConsole.set(allConsole.indexOf(curInstance), valueConsoleUpdated);
+            }*/
         }
         return allConsole;
     }
@@ -54,22 +60,23 @@ public class Console extends Device {
 
     @Override
     public String toString() {
-        String listJeux = "111 \n";
+        String listJeux = "";
 
-        if (jeux !=null) {
-            for (Jeux curentJeux :
-                    jeux) {
-                if (curentJeux !=null){
-                    listJeux += curentJeux.getNom() +" - ";
-                }
-                 // System.out.println(curentJeux.getNom());
+        int index = 0;
+        if (jeux != null) {
+            for (Jeux currentJeux : jeux) {
+                listJeux += " \n " + (index + 1) +"-"+ " nom de jeux : " + currentJeux.getNom() + " categorie : " + currentJeux.getCategorie();
+                index++;
             }
         }
-
-
-        return "\n Console  {" +
+        return "\n Console  : " +
                 "nomDevice='" + super.getNomDevice() + '\'' +
-                ", quantite=" + super.getQuantite() +
-                '}' + '\'' +listJeux;
+                "\n les Jeux dispo ='" + listJeux + '\'';
+    }
+
+    static String listerJeuxPost(Console console){
+
+        return console.toString();
+
     }
 }

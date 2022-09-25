@@ -1,5 +1,7 @@
 import jdk.jfr.Category;
 
+import java.util.ArrayList;
+
 public class Jeux {
     private String nom;
     private Categorie categorie;
@@ -17,11 +19,24 @@ public class Jeux {
         this.nom = nom;
     }
 
-    public Categorie getCategorie() {
-        return categorie;
+    public String getCategorie() {
+        return categorie.getNomCategorie();
     }
 
     public void setCategorie(Categorie categorie) {
         this.categorie = categorie;
+    }
+
+    static public String toString(ArrayList<Jeux> allJeux) {
+        String print = " \n";
+        int index = 0;
+        if (allJeux != null) {
+            for (Jeux currentJeux : allJeux) {
+                print += " \n " + (index + 1) +"-"+ " nom de jeux : " + currentJeux.nom + " categorie : " + currentJeux.getCategorie();
+                index++;
+            }
+        }
+
+        return print;
     }
 }

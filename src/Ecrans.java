@@ -13,15 +13,18 @@ public class Ecrans extends Device {
     public Ecrans(String nomEcran) {
         super(nomEcran);
     }
-    public static ArrayList<Ecrans> updateEcran(ArrayList<Ecrans> allEcran,String nameEcran) {
-        Scanner inString = new Scanner(System.in);
-        Ecrans ecran1 = new Ecrans(nameEcran);
 
+    public static ArrayList<Ecrans> updateEcran(ArrayList<Ecrans> allEcran, String nameEcran) {
+//        Ecrans ecran1 = new Ecrans(nameEcran);
         for (Device curInstance : allEcran) {
-            if (curInstance.getNomDevice().equals(ecran1.getNomDevice())) {
+            if (curInstance.getNomDevice() == nameEcran) {
+                curInstance.setQuantite(curInstance.getQuantite() - 1);
+            }
+
+           /* if (curInstance.getNomDevice().equals(ecran1.getNomDevice())) {
                 Ecrans valueEcranUpdated = new Ecrans(curInstance.getNomDevice(), (curInstance.getQuantite() - 1));
                 allEcran.set(allEcran.indexOf(curInstance), valueEcranUpdated);
-            }
+            }*/
         }
         return allEcran;
     }
@@ -36,11 +39,10 @@ public class Ecrans extends Device {
         }
         return ecranFree;
     }
+
     @Override
     public String toString() {
-        return " Ecrans  {" +
-                "nomDevice='" + super.getNomDevice() + '\'' +
-                ", quantite=" + super.getQuantite() +
-                '}'+'\'';
+        return " Ecrans  : " +
+                "nomDevice='" + super.getNomDevice() + '\'';
     }
 }

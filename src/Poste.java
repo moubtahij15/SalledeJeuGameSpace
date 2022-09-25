@@ -2,7 +2,7 @@ import java.sql.Time;
 import java.util.ArrayList;
 
 public class Poste {
-    private int id, périodeHoraire, tarif;
+    private int id;
     private Jeux jeux;
     private Ecrans ecran;
     private Console console;
@@ -29,15 +29,7 @@ public class Poste {
         return allPosteMonted;
     }
 
-    public Poste(int id, int périodeHoraire, int tarif, Jeux jeux, Ecrans ecran, Console console, Time heureDébut) {
-        this.id = id;
-        this.périodeHoraire = périodeHoraire;
-        this.tarif = tarif;
-        this.jeux = jeux;
-        this.ecran = ecran;
-        this.console = console;
-        this.heureDébut = heureDébut;
-    }
+
 
     public int getId() {
         return id;
@@ -47,21 +39,16 @@ public class Poste {
         this.id = id;
     }
 
-    public int getPériodeHoraire() {
-        return périodeHoraire;
+
+
+    public boolean isStatue() {
+        return statue;
     }
 
-    public void setPériodeHoraire(int périodeHoraire) {
-        this.périodeHoraire = périodeHoraire;
+    public void setStatue(boolean statue) {
+        this.statue = statue;
     }
 
-    public int getTarif() {
-        return tarif;
-    }
-
-    public void setTarif(int tarif) {
-        this.tarif = tarif;
-    }
 
     public Jeux getJeux() {
         return jeux;
@@ -104,10 +91,13 @@ public class Poste {
         }
     @Override
     public String toString() {
-        return "\n Poste{" +
-                "id=" + id + "\n" +
-                ecran +
-                console +
-                '}';
-    }
+        if(this.statue){
+            return "\n Poste : " +
+                    "id=" + id +  " statut  " + this.statue +"\n" +
+                    ecran +
+                    console +"\n ---------------";
+        }
+        return "";
+        }
+
 }
